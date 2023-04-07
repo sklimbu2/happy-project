@@ -1,6 +1,6 @@
 <template>
   <Happy @click.left="toggleModal" />
-  <Data :comments="comments" />
+  <Data :commentsAll ="comments" />
   <DialogBox v-if="showModal" @close="toggleModal" />
   
 </template>
@@ -8,13 +8,17 @@
 import Happy from './components/index.vue'
 import DialogBox from './components/dialogBox.vue'
 import Data from './components/data.vue'
+import { addComments } from '@babel/types'
 
 export default {
   name: 'App',
   data(){
     return{
       showModal: false,
-      comments:[]
+      comments :''
+      /*comments:[
+        {id : 1,stats: 'happy',phone: '55001390',comment: 'This is project-happy'}
+      ] */
     }
   },
   mounted(){
@@ -22,6 +26,7 @@ export default {
     .then(res => res.json())
     .then(data => this.comments = data)
     .catch(err => console.log(err.message))
+    
   },
   components:{
     DialogBox,
